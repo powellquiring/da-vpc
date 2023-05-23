@@ -1,0 +1,708 @@
+{
+	"products": [
+		{
+			"label": "VPC landing zone",
+			"name": "deploy-arch-ibm-slz-vpc",
+			"version": "v3.8.3",
+			"product_kind": "solution",
+			"tags": [
+				"converged_infra",
+				"ibm_created"
+			],
+			"keywords": [
+				"vpc",
+				"slz",
+				"IaC",
+				"Infrastructure",
+				"terraform",
+				"solution",
+				"virtual server",
+				"vsi"
+			],
+			"short_description": "powell Deploys a secure VPC network without compute resources",
+			"long_description": "The VPC landing zone deployable architecture deploys a simple Virtual Private Cloud (VPC) infrastructure without any compute resources, such as Virtual Server Instances (VSI) or Red Hat OpenShift clusters. You can use this architecture as a base on which to deploy compute resources. Or you can deploy those resources by using the other landing zone deployable architectures: VSI on VPC landing zone and Red Hat OpenShift Container Platform on VPC landing zone.",
+			"provider_name": "IBM",
+			"offering_docs_url": "https://cloud.ibm.com/docs/secure-infrastructure-vpc?topic=secure-infrastructure-vpc-overview#overview-vpc",
+			"offering_icon_url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-landing-zone/main/.docs/images/deploy-arch-slz-vpc-lt.svg",
+			"features": [
+				{
+					"title": "Creates Virtual Private Clouds",
+					"description": "Creates a VPC-based topology based on two VPCs, by default."
+				},
+				{
+					"title": "Configures subnets",
+					"description": "Defines multiple subnets in the VPC to define IP ranges and organize resources within the network."
+				},
+				{
+					"title": "Creates a transit gateway",
+					"description": "The transit gateway connects the two default VPCs that the deployable architecture creates."
+				},
+				{
+					"title": "Integrates Flow Logs and Activity tracking",
+					"description": "IBM Cloud Object Storage is used for Flow Logs and Activity Tracker, which enhance the observability and auditing of your infrastructure."
+				},
+				{
+					"title": "Supports edge networking",
+					"description": "Isolates and speeds traffic to the public internet by using an edge VPC in a specific location, if enabled."
+				}
+			],
+			"flavors": [
+				{
+					"label": "Standard",
+					"name": "standard",
+					"usage": "module \"landing-zone-vpc\" {\n  source           = \"https://cm.globalcatalog.cloud.ibm.com/api/v1-beta/offering/source//${{workingDirectory}}?archive=tgz\u0026flavor=${{flavor}}\u0026kind=terraform\u0026name=${{name}}\u0026version=${{version}}\"\n  ibmcloud_api_key = var.ibmcloud_api_key\n  region           = \"us-south\"\n  prefix           = \"slz-vpc\"\n}\n\n",
+					"compliance": {
+						"authority": "scc-v3",
+						"controls": [
+							{
+								"profile": {
+									"id": "",
+									"name": "IBM Cloud for Financial Services",
+									"version": "1.2.0"
+								},
+								"names": [
+									"AU-8(1)(b)",
+									"SC-7(4)(c)",
+									"AU-2(a)",
+									"AU-12(c)",
+									"IA-3(0)",
+									"AU-8(1)(a)",
+									"AU-8(b)",
+									"AU-12(b)",
+									"SC-8(1)(0)",
+									"SI-4(b)",
+									"AC-2(7)(b)",
+									"AC-6(9)(0)",
+									"AU-3(0)",
+									"SC-2(0)",
+									"AC-2(4)(0)",
+									"AU-12(a)",
+									"CA-7(d)",
+									"SI-12(0)",
+									"AU-2(d)",
+									"AU-8(a)",
+									"AU-11(0)",
+									"SC-11(0)",
+									"AU-4(0)",
+									"SC-8(0)",
+									"SI-4(a)",
+									"AC-2(g)",
+									"SC-3(0)",
+									"SC-23(0)",
+									"SI-4(c)"
+								]
+							}
+						]
+					},
+					"iam_permissions": [
+						{
+							"service_name": "appid",
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::serviceRole:Manager"
+							]
+						},
+						{
+							"service_name": "cloud-object-storage",
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::serviceRole:Manager"
+							]
+						},
+						{
+							"service_name": "hs-crypto",
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::serviceRole:Manager"
+							]
+						},
+						{
+							"service_name": "iam-identity",
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Administrator"
+							]
+						},
+						{
+							"service_name": "kms",
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::serviceRole:Manager"
+							]
+						},
+						{
+							"service_name": "is.vpc",
+							"role_crns": [
+								"crn:v1:bluemix:public:iam::::role:Administrator"
+							]
+						}
+					],
+					"architecture": {
+						"features": [
+							{
+								"title": "Separate VPC for management",
+								"description": "Yes"
+							},
+							{
+								"title": "Separate VPC for workloads",
+								"description": "Yes"
+							},
+							{
+								"title": "Increases security with Key Management",
+								"description": "Yes"
+							},
+							{
+								"title": "Reduces failure events by using multizone regions",
+								"description": "Yes"
+							},
+							{
+								"title": "Collects and stores Internet Protocol (IP) traffic information with Activity Tracker and Flow Logs",
+								"description": "Yes"
+							},
+							{
+								"title": "Securely connects to multiple networks with a site-to-site virtual private network",
+								"description": "Yes"
+							},
+							{
+								"title": "Simplifies risk management and demonstrates regulatory compliance with Financial Services",
+								"description": "Yes"
+							},
+							{
+								"title": "Uses an edge VPC for secure access through the public internet",
+								"description": "Yes, if enabled"
+							},
+							{
+								"title": "Uses Floating IP address for access through the public internet",
+								"description": "No"
+							}
+						],
+						"diagrams": [
+							{
+								"diagram": {
+									"url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-landing-zone/main/reference-architectures/vpc.drawio.svg",
+									"caption": "VPC landing zone - Standard variation",
+									"type": "image/svg+xml"
+								},
+								"description": "The Standard variation of the VPC landing zone deployable architecture deploys a simple Virtual Private Cloud (VPC) infrastructure without any compute resources. You can use this architecture as a base on which to deploy compute resources. The Standard variation uses two Virtual Private Clouds (VPC) - a Management VPC and a Workload VPC - to manage the environment and the deployed workload. Each VPC is a multi-zoned, multi-subnet implementation that keeps your workloads secure. A transit gateway connects the VPCs to each other and Virtual Private Endpoints are used connect to IBM Cloud services."
+							}
+						]
+					},
+					"configuration": [
+						{
+							"key": "region",
+							"type": "string",
+							"default_value": "__NOT_SET__",
+							"description": "Region where VPC will be created. To find your VPC region, use `ibmcloud is regions` command to find available regions.",
+							"required": true,
+							"custom_config": {}
+						},
+						{
+							"key": "hs_crypto_instance_name",
+							"type": "string",
+							"default_value": "__NULL__",
+							"description": "Optionally, you can bring you own Hyper Protect Crypto Service instance for key management. If you would like to use that instance, add the name here. Otherwise, leave as null",
+							"hidden": true
+						},
+						{
+							"key": "hs_crypto_resource_group",
+							"type": "string",
+							"default_value": "__NULL__",
+							"description": "If you're using Hyper Protect Crypto services in a resource group other than `Default`, provide the name here.",
+							"hidden": true
+						},
+						{
+							"key": "add_edge_vpc",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Create an edge VPC. This VPC will be dynamically added to the list of VPCs in `var.vpcs`. Conflicts with `create_f5_network_on_management_vpc` to prevent overlapping subnet CIDR blocks.",
+							"hidden": true
+						},
+						{
+							"key": "teleport_management_zones",
+							"type": "number",
+							"default_value": 0,
+							"description": "Number of zones to create teleport VSI on Management VPC if not using F5. If you are using F5, ignore this value.",
+							"hidden": true
+						},
+						{
+							"key": "create_f5_network_on_management_vpc",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Set up bastion on management VPC. This value conflicts with `add_edge_vpc` to prevent overlapping subnet CIDR blocks.",
+							"hidden": true
+						},
+						{
+							"key": "provision_teleport_in_f5",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Provision teleport VSI in `bastion` subnet tier of F5 network if able.",
+							"hidden": true
+						},
+						{
+							"key": "vpn_firewall_type",
+							"type": "string",
+							"default_value": "__NULL__",
+							"description": "Bastion type if provisioning bastion. Can be `full-tunnel`, `waf`, or `vpn-and-waf`.",
+							"hidden": true
+						},
+						{
+							"key": "ssh_public_key",
+							"type": "string",
+							"default_value": "__NULL__",
+							"description": "Public SSH Key. Must be an RSA key with a key size of either 2048 bits or 4096 bits (recommended) - See https://cloud.ibm.com/docs/vpc?topic=vpc-ssh-keys. If key already exists in the deployment region, it will be used and no new key will be created. Use only if provisioning F5 or Bastion Host.",
+							"hidden": true
+						},
+						{
+							"key": "f5_image_name",
+							"type": "string",
+							"default_value": "f5-bigip-17-0-0-1-0-0-4-all-1slot",
+							"description": "Image name for f5 deployments. Must be null or one of `f5-bigip-15-1-5-1-0-0-14-all-1slot`,`f5-bigip-15-1-5-1-0-0-14-ltm-1slot`, `f5-bigip-16-1-2-2-0-0-28-ltm-1slot`,`f5-bigip-16-1-2-2-0-0-28-all-1slot`,`f5-bigip-16-1-3-2-0-0-4-ltm-1slot`,`f5-bigip-16-1-3-2-0-0-4-all-1slot`,`f5-bigip-17-0-0-1-0-0-4-ltm-1slot`,`f5-bigip-17-0-0-1-0-0-4-all-1slot`].",
+							"hidden": true
+						},
+						{
+							"key": "f5_instance_profile",
+							"type": "string",
+							"default_value": "cx2-4x8",
+							"description": "F5 vsi instance profile. Use the IBM Cloud CLI command `ibmcloud is instance-profiles` to see available image profiles.",
+							"hidden": true
+						},
+						{
+							"key": "hostname",
+							"type": "string",
+							"default_value": "f5-ve-01",
+							"description": "The F5 BIG-IP hostname",
+							"hidden": true
+						},
+						{
+							"key": "domain",
+							"type": "string",
+							"default_value": "local",
+							"description": "The F5 BIG-IP domain name",
+							"hidden": true
+						},
+						{
+							"key": "tmos_admin_password",
+							"type": "string",
+							"default_value": "__NULL__",
+							"description": "admin account password for the F5 BIG-IP instance",
+							"hidden": true
+						},
+						{
+							"key": "license_type",
+							"type": "string",
+							"default_value": "none",
+							"description": "How to license, may be 'none','byol','regkeypool','utilitypool'",
+							"hidden": true
+						},
+						{
+							"key": "byol_license_basekey",
+							"type": "string",
+							"default_value": "__NULL__",
+							"description": "Bring your own license registration key for the F5 BIG-IP instance",
+							"hidden": true
+						},
+						{
+							"key": "license_host",
+							"type": "string",
+							"default_value": "__NULL__",
+							"description": "BIGIQ IP or hostname to use for pool based licensing of the F5 BIG-IP instance",
+							"hidden": true
+						},
+						{
+							"key": "license_username",
+							"type": "string",
+							"default_value": "__NULL__",
+							"description": "BIGIQ username to use for the pool based licensing of the F5 BIG-IP instance",
+							"hidden": true
+						},
+						{
+							"key": "license_password",
+							"type": "string",
+							"default_value": "__NULL__",
+							"description": "BIGIQ password to use for the pool based licensing of the F5 BIG-IP instance",
+							"hidden": true
+						},
+						{
+							"key": "license_pool",
+							"type": "string",
+							"default_value": "__NULL__",
+							"description": "BIGIQ license pool name of the pool based licensing of the F5 BIG-IP instance",
+							"hidden": true
+						},
+						{
+							"key": "license_sku_keyword_1",
+							"type": "string",
+							"default_value": "__NULL__",
+							"description": "BIGIQ primary SKU for ELA utility licensing of the F5 BIG-IP instance",
+							"hidden": true
+						},
+						{
+							"key": "license_sku_keyword_2",
+							"type": "string",
+							"default_value": "__NULL__",
+							"description": "BIGIQ secondary SKU for ELA utility licensing of the F5 BIG-IP instance",
+							"hidden": true
+						},
+						{
+							"key": "license_unit_of_measure",
+							"type": "string",
+							"default_value": "hourly",
+							"description": "BIGIQ utility pool unit of measurement",
+							"hidden": true
+						},
+						{
+							"key": "do_declaration_url",
+							"type": "string",
+							"default_value": "null",
+							"description": "URL to fetch the f5-declarative-onboarding declaration",
+							"hidden": true
+						},
+						{
+							"key": "as3_declaration_url",
+							"type": "string",
+							"default_value": "null",
+							"description": "URL to fetch the f5-appsvcs-extension declaration",
+							"hidden": true
+						},
+						{
+							"key": "ts_declaration_url",
+							"type": "string",
+							"default_value": "null",
+							"description": "URL to fetch the f5-telemetry-streaming declaration",
+							"hidden": true
+						},
+						{
+							"key": "phone_home_url",
+							"type": "string",
+							"default_value": "null",
+							"description": "The URL to POST status when BIG-IP is finished onboarding",
+							"hidden": true
+						},
+						{
+							"key": "template_source",
+							"type": "string",
+							"default_value": "f5devcentral/ibmcloud_schematics_bigip_multinic_declared",
+							"description": "The terraform template source for phone_home_url_metadata",
+							"hidden": true
+						},
+						{
+							"key": "template_version",
+							"type": "string",
+							"default_value": "20210201",
+							"description": "The terraform template version for phone_home_url_metadata",
+							"hidden": true
+						},
+						{
+							"key": "app_id",
+							"type": "string",
+							"default_value": "null",
+							"description": "The terraform application id for phone_home_url_metadata",
+							"hidden": true
+						},
+						{
+							"key": "tgactive_url",
+							"type": "string",
+							"default_value": "",
+							"description": "The URL to POST L3 addresses when tgactive is triggered",
+							"hidden": true
+						},
+						{
+							"key": "tgstandby_url",
+							"type": "string",
+							"default_value": "null",
+							"description": "The URL to POST L3 addresses when tgstandby is triggered",
+							"hidden": true
+						},
+						{
+							"key": "tgrefresh_url",
+							"type": "string",
+							"default_value": "null",
+							"description": "The URL to POST L3 addresses when tgrefresh is triggered",
+							"hidden": true
+						},
+						{
+							"key": "enable_f5_management_fip",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Enable F5 management interface floating IP. Conflicts with `enable_f5_external_fip`, VSI can only have one floating IP per instance.",
+							"hidden": true
+						},
+						{
+							"key": "enable_f5_external_fip",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Enable F5 external interface floating IP. Conflicts with `enable_f5_management_fip`, VSI can only have one floating IP per instance.",
+							"hidden": true
+						},
+						{
+							"key": "use_existing_appid",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Use an existing appid instance. If this is false, one will be automatically created.",
+							"hidden": true
+						},
+						{
+							"key": "appid_name",
+							"type": "string",
+							"default_value": "appid",
+							"description": "Name of appid instance.",
+							"hidden": true
+						},
+						{
+							"key": "appid_resource_group",
+							"type": "string",
+							"default_value": "__NULL__",
+							"description": "Resource group for existing appid instance. This value is ignored if a new instance is created.",
+							"hidden": true
+						},
+						{
+							"key": "teleport_instance_profile",
+							"type": "string",
+							"default_value": "cx2-4x8",
+							"description": "Machine type for Teleport VSI instances. Use the IBM Cloud CLI command `ibmcloud is instance-profiles` to see available image profiles.",
+							"hidden": true
+						},
+						{
+							"key": "teleport_vsi_image_name",
+							"type": "string",
+							"default_value": "ibm-ubuntu-18-04-6-minimal-amd64-2",
+							"description": "Teleport VSI image name. Use the IBM Cloud CLI command `ibmcloud is images` to see availabled images.",
+							"hidden": true
+						},
+						{
+							"key": "teleport_license",
+							"type": "string",
+							"default_value": "__NULL__",
+							"description": "The contents of the PEM license file",
+							"hidden": true
+						},
+						{
+							"key": "https_cert",
+							"type": "string",
+							"default_value": "__NULL__",
+							"description": "The https certificate used by bastion host for teleport",
+							"hidden": true
+						},
+						{
+							"key": "https_key",
+							"type": "string",
+							"default_value": "__NULL__",
+							"description": "The https private key used by bastion host for teleport",
+							"hidden": true
+						},
+						{
+							"key": "teleport_hostname",
+							"type": "string",
+							"default_value": "__NULL__",
+							"description": "The name of the instance or bastion host",
+							"hidden": true
+						},
+						{
+							"key": "teleport_domain",
+							"type": "string",
+							"default_value": "__NULL__",
+							"description": "The domain of the bastion host",
+							"hidden": true
+						},
+						{
+							"key": "teleport_version",
+							"type": "string",
+							"default_value": "7.1.0",
+							"description": "Version of Teleport Enterprise to use",
+							"hidden": true
+						},
+						{
+							"key": "message_of_the_day",
+							"type": "string",
+							"default_value": "__NULL__",
+							"description": "Banner message that is exposed to the user at authentication time",
+							"hidden": true
+						},
+						{
+							"key": "teleport_admin_email",
+							"type": "string",
+							"default_value": "__NULL__",
+							"description": "Email for teleport vsi admin.",
+							"hidden": true
+						},
+						{
+							"key": "create_secrets_manager",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Create a secrets manager deployment.",
+							"hidden": true
+						},
+						{
+							"key": "enable_scc",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Enable creation of SCC resources",
+							"hidden": true
+						},
+						{
+							"key": "scc_cred_name",
+							"type": "string",
+							"default_value": "slz-cred",
+							"description": "The name of the credential",
+							"hidden": true
+						},
+						{
+							"key": "scc_cred_description",
+							"type": "string",
+							"default_value": "This credential is used for SCC.",
+							"description": "Description of SCC Credential",
+							"hidden": true
+						},
+						{
+							"key": "scc_collector_description",
+							"type": "string",
+							"default_value": "collector description",
+							"description": "Description of SCC Collector",
+							"hidden": true
+						},
+						{
+							"key": "scc_scope_description",
+							"type": "string",
+							"default_value": "IBM-schema-for-configuration-collection",
+							"description": "Description of SCC Scope",
+							"hidden": true
+						},
+						{
+							"key": "scc_scope_name",
+							"type": "string",
+							"default_value": "scope",
+							"description": "The name of the SCC Scope",
+							"hidden": true
+						},
+						{
+							"key": "override",
+							"type": "boolean",
+							"default_value": false,
+							"description": "Override default values with custom JSON template. This uses the file `override.json` to allow users to create a fully customized environment.",
+							"hidden": true
+						},
+						{
+							"key": "override_json_string",
+							"type": "string",
+							"default_value": "",
+							"description": "Override default values with custom JSON. Any value here other than an empty string will override all other configuration changes."
+						},
+						{
+							"key": "use_random_cos_suffix",
+							"type": "boolean",
+							"default_value": true,
+							"description": "Add a random 8 character string to the end of each cos instance, bucket, and key."
+						},
+						{
+							"key": "prefix",
+							"type": "string",
+							"default_value": "__NOT_SET__",
+							"description": "A unique identifier for resources. Must begin with a lowercase letter and end with a lowercase letter or number. This prefix will be prepended to any resources provisioned by this template. Prefixes must be 16 or fewer characters.",
+							"required": true
+						},
+						{
+							"key": "enable_transit_gateway",
+							"type": "boolean",
+							"default_value": true,
+							"description": "Create transit gateway"
+						},
+						{
+							"key": "add_atracker_route",
+							"type": "boolean",
+							"default_value": true,
+							"description": "Atracker can only have one route per zone. use this value to disable or enable the creation of atracker route"
+						},
+						{
+							"key": "add_kms_block_storage_s2s",
+							"type": "boolean",
+							"default_value": true,
+							"description": "Whether to create a service-to-service authorization between block storage and the key management service."
+						},
+						{
+							"key": "vpcs",
+							"type": "array",
+							"default_value": "[\"management\", \"workload\"]",
+							"description": "List of VPCs to create. The first VPC in this list will always be considered the `management` VPC, and will be where the VPN Gateway is connected. VPCs names can only be a maximum of 16 characters and can only contain lowercase letters, numbers, and - characters. VPC names must begin with a lowercase letter and end with a lowercase letter or number."
+						},
+						{
+							"key": "tags",
+							"type": "array",
+							"default_value": "[]",
+							"description": "List of resource tags to apply to resources created by this module."
+						},
+						{
+							"key": "network_cidr",
+							"type": "string",
+							"default_value": "10.0.0.0/8",
+							"description": "Network CIDR for the VPC. This is used to manage network ACL rules for cluster provisioning."
+						},
+						{
+							"key": "ibmcloud_api_key",
+							"type": "password",
+							"description": "The IBM Cloud platform API key needed to deploy IAM enabled resources.",
+							"required": true
+						}
+					],
+					"outputs": [
+						{
+							"key": "schematics_workspace_id",
+							"description": "ID of the IBM Cloud Schematics workspace. Returns null if not ran in Schematics"
+						},
+						{
+							"key": "ssh_key_data",
+							"description": "List of SSH key data"
+						},
+						{
+							"key": "cos_data",
+							"description": "List of Cloud Object Storage instance data"
+						},
+						{
+							"key": "vpn_data",
+							"description": "List of VPN data"
+						},
+						{
+							"key": "ssh_public_key",
+							"description": "The string value of the ssh public key"
+						},
+						{
+							"key": "resource_group_data",
+							"description": "List of resource groups data used within landing zone."
+						},
+						{
+							"key": "vpc_data",
+							"description": "List of VPC data"
+						},
+						{
+							"key": "subnet_data",
+							"description": "List of Subnet data created"
+						},
+						{
+							"key": "resource_group_names",
+							"description": "List of resource groups names used within landing zone."
+						},
+						{
+							"key": "config",
+							"description": "Output configuration as encoded JSON"
+						},
+						{
+							"key": "vpc_names",
+							"description": "A list of the names of the VPC"
+						},
+						{
+							"key": "cos_bucket_data",
+							"description": "List of data for COS buckets created"
+						},
+						{
+							"key": "transit_gateway_data",
+							"description": "Created transit gateway data"
+						},
+						{
+							"key": "prefix",
+							"description": "The prefix that is associated with all resources"
+						},
+						{
+							"key": "transit_gateway_name",
+							"description": "The name of the transit gateway"
+						}
+					],
+					"install_type": "fullstack"
+				}
+			]
+		}
+	]
+}
