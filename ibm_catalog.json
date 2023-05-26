@@ -3,7 +3,7 @@
 		{
 			"label": "da-vpc",
 			"name": "da-vpc-name",
-			"version": "v3.8.3",
+			"version": "v1.0.0",
 			"product_kind": "solution",
 			"tags": [
 				"converged_infra",
