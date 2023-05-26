@@ -1,8 +1,8 @@
 {
 	"products": [
 		{
-			"label": "VPC landing zone",
-			"name": "deploy-arch-ibm-slz-vpc",
+			"label": "da-vpc",
+			"name": "da-vpc-name",
 			"version": "v3.8.3",
 			"product_kind": "solution",
 			"tags": [
@@ -19,8 +19,8 @@
 				"virtual server",
 				"vsi"
 			],
-			"short_description": "powell Deploys a secure VPC network without compute resources",
-			"long_description": "The VPC landing zone deployable architecture deploys a simple Virtual Private Cloud (VPC) infrastructure without any compute resources, such as Virtual Server Instances (VSI) or Red Hat OpenShift clusters. You can use this architecture as a base on which to deploy compute resources. Or you can deploy those resources by using the other landing zone deployable architectures: VSI on VPC landing zone and Red Hat OpenShift Container Platform on VPC landing zone.",
+			"short_description": "da-vpc short description",
+			"long_description": "da-vpc long description yada yada",
 			"provider_name": "IBM",
 			"offering_docs_url": "https://cloud.ibm.com/docs/secure-infrastructure-vpc?topic=secure-infrastructure-vpc-overview#overview-vpc",
 			"offering_icon_url": "https://raw.githubusercontent.com/terraform-ibm-modules/terraform-ibm-landing-zone/main/.docs/images/deploy-arch-slz-vpc-lt.svg",
