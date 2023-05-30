@@ -9,10 +9,34 @@ module "landing-zone-vpc" {
 }
 */
 
+locals {
+  basename = var.prefix
+}
+
+data "ibm_resource_group" "group" {
+  name = var.resource_group_name
+}
+
+
+
+resource "ibm_is_vpc" "vpc" {
+  resource_group              = data.ibm_resource_group.group.id
+  name                        = "${local.basename}-vpc"
+  default_security_group_name = "${local.basename}-sec-group"
+  default_network_acl_name    = "${local.basename}-acl-group"
+}
+
+
 output "prefix" {
   value = var.prefix
 }
 
 output "region" {
   value = var.region
+}
+
+output "vpc" {
+  value = {
+    id = ibm_is_vpc.vpc.id
+  }
 }

@@ -156,12 +156,32 @@
 					},
 					"configuration": [
 						{
+							"key": "ibmcloud_api_key",
+							"type": "password",
+							"description": "The IBM Cloud platform API key needed to deploy IAM enabled resources.",
+							"required": true
+						},
+						{
 							"key": "region",
 							"type": "string",
 							"default_value": "__NOT_SET__",
 							"description": "Region where VPC will be created. To find your VPC region, use `ibmcloud is regions` command to find available regions.",
 							"required": true,
 							"custom_config": {}
+						},
+						{
+							"key": "prefix",
+							"type": "string",
+							"default_value": "__NOT_SET__",
+							"description": "A unique identifier for resources. Must begin with a lowercase letter and end with a lowercase letter or number. This prefix will be prepended to any resources provisioned by this template. Prefixes must be 16 or fewer characters.",
+							"required": true
+						},
+						{
+							"key": "resource_group_name",
+							"type": "string",
+							"default_value": "__NOT_SET__",
+							"description": "The name of an existing resource group",
+							"required": true
 						},
 						{
 							"key": "hs_crypto_instance_name",
@@ -561,13 +581,6 @@
 							"description": "Add a random 8 character string to the end of each cos instance, bucket, and key."
 						},
 						{
-							"key": "prefix",
-							"type": "string",
-							"default_value": "__NOT_SET__",
-							"description": "A unique identifier for resources. Must begin with a lowercase letter and end with a lowercase letter or number. This prefix will be prepended to any resources provisioned by this template. Prefixes must be 16 or fewer characters.",
-							"required": true
-						},
-						{
 							"key": "enable_transit_gateway",
 							"type": "boolean",
 							"default_value": true,
@@ -602,12 +615,6 @@
 							"type": "string",
 							"default_value": "10.0.0.0/8",
 							"description": "Network CIDR for the VPC. This is used to manage network ACL rules for cluster provisioning."
-						},
-						{
-							"key": "ibmcloud_api_key",
-							"type": "password",
-							"description": "The IBM Cloud platform API key needed to deploy IAM enabled resources.",
-							"required": true
 						}
 					],
 					"outputs": [

@@ -8,12 +8,10 @@ variable "ibmcloud_api_key" {
   description = "apikey"
 }
 
-/*
-variable "resource_group" {
+variable "resource_group_name" {
   type        = string
   description = "Optionally, you can bring you own Hyper Protect Crypto Service instance for key management. If you would like to use that instance, add the name here. Otherwise, leave as null"
 }
-*/
 
 variable "prefix" {
   type        = string
