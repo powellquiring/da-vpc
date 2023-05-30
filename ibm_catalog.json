@@ -3,7 +3,7 @@
 		{
 			"label": "da-vpc",
 			"name": "da-vpc-name",
-			"version": "v1.0.0",
+			"version": "v1.0.1",
 			"product_kind": "solution",
 			"tags": [
 				"converged_infra",
@@ -61,7 +61,7 @@
 									"version": "1.2.0"
 								},
 								"names": [
-									"AU-8(1)(b)"
+									"SA-4(b)"
 								]
 							}
 						]
