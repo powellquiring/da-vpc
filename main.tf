@@ -18,14 +18,13 @@ data "ibm_resource_group" "group" {
 }
 
 
-
-resource "ibm_is_vpc" "vpc" {
-  resource_group              = data.ibm_resource_group.group.id
-  name                        = "${local.basename}-vpc"
-  default_security_group_name = "${local.basename}-sec-group"
-  default_network_acl_name    = "${local.basename}-acl-group"
+resource "ibm_resource_instance" "cos" {
+  name              = "${local.basename}-cos"
+  resource_group_id = data.ibm_resource_group.group.id
+  service           = "cloud-object-storage"
+  plan              = "standard"
+  location          = "global"
 }
-
 
 output "prefix" {
   value = var.prefix
@@ -35,8 +34,8 @@ output "region" {
   value = var.region
 }
 
-output "vpc" {
+output "cos" {
   value = {
-    id = ibm_is_vpc.vpc.id
+    id = ibm_resource_instance.cos.id
   }
 }
