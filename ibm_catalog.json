@@ -61,12 +61,12 @@
 									"version": "1.2.0"
 								},
 								"names": [
-									"AC-20(a)"
+									"CM-7(a)"
 								]
 							}
 						]
 					},
-					"iam_permissions": [
+"iam_permissions": [
 						{
 							"service_name": "kms",
 							"role_crns": [

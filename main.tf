@@ -26,6 +26,19 @@ resource "ibm_resource_instance" "cos" {
   location          = "global"
 }
 
+locals {
+  account_id = split("/", split(":", ibm_resource_instance.cos.id)[6])[1]
+}
+
+resource "ibm_cos_bucket" "smart-us-south" {
+  bucket_name          = "${local.basename}-bucket-${local.account_id}"
+  resource_instance_id = ibm_resource_instance.cos.id
+  region_location      = var.region
+  storage_class        = "smart"
+}
+
+
+
 output "prefix" {
   value = var.prefix
 }
