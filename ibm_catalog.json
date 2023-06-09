@@ -3,7 +3,7 @@
 		{
 			"label": "da-vpc",
 			"name": "da-vpc-name",
-			"version": "v1.0.6",
+			"version": "v1.0.7",
 			"product_kind": "solution",
 			"tags": [
 				"converged_infra",
@@ -19,7 +19,7 @@
 				"virtual server",
 				"vsi"
 			],
-			"short_description": "da-vpc short description",
+			"short_description": "da-vpc short description 107",
 			"long_description": "da-vpc long description yada yada",
 			"provider_name": "IBM",
 			"offering_docs_url": "https://cloud.ibm.com/docs/secure-infrastructure-vpc?topic=secure-infrastructure-vpc-overview#overview-vpc",
